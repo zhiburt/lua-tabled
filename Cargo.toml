@@ -1,0 +1,33 @@
+[package]
+name = "lua-tabled"
+version = "0.1.0"
+authors = ["Maxim Zhiburt <zhiburt@gmail.com>"]
+edition = "2021"
+description = "The Lua module written in Rust that provides pretty table support for Lua."
+repository = "https://github.com/zhiburt/lua-tabled"
+homepage = "https://github.com/zhiburt/lua-tabled"
+license = "MIT"
+keywords = ["table", "print", "pretty-table", "format", "lua"]
+categories = ["text-processing", "visualization"]
+readme = "README.md"
+
+[workspace]
+members = [
+    "testcrate",
+]
+
+[features]
+lua54 = ["mlua/lua54"]
+lua53 = ["mlua/lua53"]
+lua52 = ["mlua/lua52"]
+lua51 = ["mlua/lua51"]
+luajit = ["mlua/luajit"]
+vendored = ["mlua/vendored"]
+
+[lib]
+name = "tabled"
+crate-type = ["cdylib"]
+
+[dependencies]
+mlua = { version = "0.8.9", features = ["module", "send", "serialize"] }
+tabled = "0.12"
