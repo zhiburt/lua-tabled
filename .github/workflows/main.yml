@@ -120,13 +120,8 @@ jobs:
       matrix:
         lua: [lua54, lua53, lua52, lua51, luajit]
     steps:
-      - uses: actions/checkout@v2
-      - uses: actions-rs/toolchain@v1
+      - uses: actions/checkout@v3
+      - uses: dtolnay/rust-toolchain@stable
         with:
-            toolchain: nightly
-            components: clippy
-            override: true
-      - uses: actions-rs/clippy-check@v1
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-          args: --features "${{ matrix.lua }},vendored"
+          target: ${{ matrix.target }}
+      - run: cargo clippy --all --no-default-features --features=${{ matrix.lua }},vendored -- -D warnings
